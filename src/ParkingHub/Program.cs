@@ -16,9 +16,9 @@ namespace parking
 
         public static async Task VerifyParking()
         {
-            string deviceKey = "f8IFLhucJLSOIw/iDV5oQ1ZYe/K6sseRk6NTzEsg/IE=";
-            string deviceId = "parking-lot";
-            string iotHubHostName = "hubtestmarcelo.azure-devices.net";
+            string deviceKey = "";
+            string deviceId = "";
+            string iotHubHostName = "";
             var deviceAuthentication = new DeviceAuthenticationWithRegistrySymmetricKey(deviceId, deviceKey);
 
             DeviceClient deviceClient = DeviceClient.Create(iotHubHostName, deviceAuthentication, TransportType.Mqtt);
