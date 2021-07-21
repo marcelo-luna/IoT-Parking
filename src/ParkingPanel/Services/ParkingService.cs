@@ -18,20 +18,5 @@ namespace ParkingPanel.Services
             ParkingEventHandler?.Invoke(this, EventArgs.Empty);
            return Task.CompletedTask;
         }
-
-        //private Task UpdateParking()
-        //{
-        //    Task.Run(async () => 
-        //    {
-        //        while (true)
-        //        {
-        //            ParkingCount++;
-        //            ParkingEventHandler?.Invoke(this, EventArgs.Empty);
-        //            await Task.Delay(1000);
-        //        }
-        //    });
-
-        //    return Task.CompletedTask;
-        //}
     }
 }

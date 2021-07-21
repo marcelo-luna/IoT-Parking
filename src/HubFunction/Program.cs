@@ -23,7 +23,7 @@ namespace HubFunction
                 {
                     // Add Logging
                     services.AddLogging();
-
+                    services.AddSingleton(new ParkingFunctionService());
                     // Add HttpClient
                     //services.AddHttpClient();
 

@@ -5,25 +5,39 @@
 <h1>Parking Panel</h1>
 
 <div>
-    <div class="row">
-        <div class="col-sm-6">
+    <div class="row" style="margin-bottom:20px">
+        <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    <h3 class="card-title">Available Parking</h3>
-                    <h3 class="card-title">@ParkingService.ParkingCount</h3>
+                    <h3 class="card-title">Parking Spaces Available</h3>
+                    <h3 class="card-title">@currentCount</h3>
                 </div>
 
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Parked Cars</h3>
+                    <h3 class="card-title">@ParkingService.ParkingCount</h3>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Total</h3>
+                    <h3 class="card-title">40</h3>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-@*<SurveyPrompt Title="How is Blazor working for you?" />*@
-
 @code{
-    string test = "MArcelo";
-    int parkingCount = 15;
-
     private int currentCount = 0;
     private Timer timer = new(1000);
 
@@ -36,6 +50,7 @@
     private void OnParkingCallBack()
     {
         _ = InvokeAsync(() => {
+            currentCount = 40 - ParkingService.ParkingCount;
             StateHasChanged();
         });
     }

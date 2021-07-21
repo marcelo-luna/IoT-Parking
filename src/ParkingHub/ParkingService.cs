@@ -1,5 +1,6 @@
 ﻿using Microsoft.Azure.Devices.Client;
 using ParkingHub.Configuration;
+using ParkingModel;
 using System;
 using System.Text;
 using System.Text.Json;
@@ -37,12 +38,12 @@ namespace ParkingHub
                 else
                     totalParking--;
 
-                var telemetryDataPoint = new
+                var telemetryDataPoint = new Parking
                 {
-                    messageId = Guid.NewGuid(),
-                    deviceId = _deviceConfiguration.DeviceId,
-                    action = currentAction == 0 ? "New exit" : "New enter",
-                    carsParking = totalParking
+                    MessageId = Guid.NewGuid().ToString(),
+                    DeviceId = _deviceConfiguration.DeviceId,
+                    Action = currentAction == 0 ? "New exit" : "New enter",
+                    CarsParking = totalParking
                 };
 
 
