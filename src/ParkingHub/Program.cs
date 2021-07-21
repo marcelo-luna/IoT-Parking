@@ -1,59 +1,41 @@
 ﻿using System;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using ParkingHub;
+using System.Configuration;
+using ParkingHub.Configuration;
 using System.Threading.Tasks;
-using Microsoft.Azure.Devices.Client;
-using System.Text.Json;
-using System.Text;
 
 namespace parking
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             Console.WriteLine("Init device");
-            VerifyParking().Wait();
-        }
-
-        public static async Task VerifyParking()
-        {
-            string deviceKey = "";
-            string deviceId = "";
-            string iotHubHostName = "";
-            var deviceAuthentication = new DeviceAuthenticationWithRegistrySymmetricKey(deviceId, deviceKey);
-
-            DeviceClient deviceClient = DeviceClient.Create(iotHubHostName, deviceAuthentication, TransportType.Mqtt);
-            var rand = new Random();
-            int totalParking = 0;
-
-            while (true)
-            {
-                int currentAction = rand.Next(0, 2);
-
-                if (currentAction == 0 && totalParking == 0) continue;
-
-                if (currentAction == 1)
-                    totalParking++;
-                else
-                    totalParking--;
-
-                var telemetryDataPoint = new
+            IHost host = CreateHostBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, configuration) =>
                 {
-                    messageId = Guid.NewGuid(),
-                    deviceId = deviceId,
-                    action = currentAction == 0 ? "New exit" : "New enter",
-                    carsParking = totalParking
-                };
+                    IHostEnvironment env = hostingContext.HostingEnvironment;
+                    configuration
+                       .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
+                       //.AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true);
+                }).ConfigureServices((context, services) =>
+                {
+                    services.AddSingleton(new DeviceConfiguration(
+                        context.Configuration.GetSection("IotHub").GetValue<string>("DeviceKey"),
+                        context.Configuration.GetSection("IotHub").GetValue<string>("DeviceId"),
+                        context.Configuration.GetSection("IotHub").GetValue<string>("IotHubHostName")));
+                    services.AddSingleton(new ParkingService(services.BuildServiceProvider().GetRequiredService<DeviceConfiguration>()));
+                })
+                .Build();
 
-
-                string messageString = JsonSerializer.Serialize(telemetryDataPoint);
-                Message message = new Message(Encoding.ASCII.GetBytes(messageString));
-                message.Properties.Add("parking", (currentAction > 40) ? "true" : "false");
-
-                await deviceClient.SendEventAsync(message);
-                Console.WriteLine("{0} > Sending message: {1}", DateTime.Now, messageString);
-
-                await Task.Delay(3000);
-            }
+            await host.RunAsync();
+            //VerifyParking().Wait();
         }
+
+        static IHostBuilder CreateHostBuilder(string[] args) =>
+           Host.CreateDefaultBuilder(args);
     }
 }
