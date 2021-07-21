@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ParkingPanel.Services;
 
 namespace ParkingPanel
 {
@@ -25,9 +26,10 @@ namespace ParkingPanel
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services.AddSingleton(new ParkingService());
+            services.AddRazorPages().AddNewtonsoftJson();
             services.AddServerSideBlazor();
-            services.AddMvc(setupAction: options => options.EnableEndpointRouting = false);
+            services.AddMvc(setupAction: options => options.EnableEndpointRouting = false).AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

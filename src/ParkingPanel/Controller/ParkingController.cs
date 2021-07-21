@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ParkingPanel.Services;
 
 namespace ParkingPanel.Controller
 {
@@ -6,16 +7,32 @@ namespace ParkingPanel.Controller
     [Route("api/[controller]")]
     public class ParkingController : ControllerBase
     {
-        [HttpPost]
-        public ActionResult ParkingPost()
+        private ParkingService _parkingService;
+        public ParkingController(ParkingService parkingService)
         {
+            _parkingService = parkingService;
+        }
+
+        [HttpPost("{parkingCount}")]
+        public ActionResult ParkingPost(int parkingCount)
+        {
+            try
+            {
+                _parkingService.UpdateParking(parkingCount);
+            }
+            catch (System.Exception)
+            {
+
+                return StatusCode(500);
+            }
             return Ok();
         }
 
         [HttpGet]
         public ActionResult ParkingGet()
         {
-            return Ok();
+
+            return Ok(_parkingService.ParkingCount);
         }
     }
 }
