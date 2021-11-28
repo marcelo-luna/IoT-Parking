@@ -6,6 +6,9 @@ using ParkingHub;
 using System.Configuration;
 using ParkingHub.Configuration;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using ParkingDevice.Simulator;
+using Interfaces.ParkingDevice;
 
 namespace parking
 {
@@ -27,7 +30,9 @@ namespace parking
                         context.Configuration.GetSection("IotHub").GetValue<string>("DeviceKey"),
                         context.Configuration.GetSection("IotHub").GetValue<string>("DeviceId"),
                         context.Configuration.GetSection("IotHub").GetValue<string>("IotHubHostName")));
-                    services.AddSingleton(new ParkingService(services.BuildServiceProvider().GetRequiredService<DeviceConfiguration>()));
+                    services.AddHttpClient();
+                    services.AddSingleton(new ParkingService(services.BuildServiceProvider().GetRequiredService<DeviceConfiguration>(), services.BuildServiceProvider().GetRequiredService<System.Net.Http.HttpClient>() ));
+                    services.AddSingleton<IGateSensor, GateSensorSimulator>();
                 })
                 .Build();
 

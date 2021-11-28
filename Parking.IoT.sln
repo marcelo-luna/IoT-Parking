@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkingHub", "src\ParkingHu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkingPanel", "src\ParkingPanel\ParkingPanel.csproj", "{D1039764-BB01-4A6E-8FF8-FA66F5F59B7D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HubFunction", "src\HubFunction\HubFunction.csproj", "{593D1CA2-C6C4-4DD2-8D26-3DBA916940D2}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkingModel", "src\ParkingModel\ParkingModel.csproj", "{485003EF-28A8-4F86-8218-456C44A378C7}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{D1039764-BB01-4A6E-8FF8-FA66F5F59B7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1039764-BB01-4A6E-8FF8-FA66F5F59B7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1039764-BB01-4A6E-8FF8-FA66F5F59B7D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{593D1CA2-C6C4-4DD2-8D26-3DBA916940D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{593D1CA2-C6C4-4DD2-8D26-3DBA916940D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{593D1CA2-C6C4-4DD2-8D26-3DBA916940D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{593D1CA2-C6C4-4DD2-8D26-3DBA916940D2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{485003EF-28A8-4F86-8218-456C44A378C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{485003EF-28A8-4F86-8218-456C44A378C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{485003EF-28A8-4F86-8218-456C44A378C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
