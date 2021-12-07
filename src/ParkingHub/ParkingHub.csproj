@@ -30,7 +30,7 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
-    <PackageReference Include="ParkingDevice" Version="1.0.1-CI-20211128-013428" />
+    <PackageReference Include="ParkingDevice" Version="1.0.0-CI-20211128-001123" />
   </ItemGroup>
 
   <ItemGroup>
