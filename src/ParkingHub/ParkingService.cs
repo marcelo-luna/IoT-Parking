@@ -27,7 +27,7 @@ namespace ParkingHub
         public async Task VerifyParking()
         {
 
-            var deviceAuthentication = new DeviceAuthenticationWithRegistrySymmetricKey(_deviceConfiguration.DeviceId, _deviceConfiguration.DeviceKey);
+            //var deviceAuthentication = new DeviceAuthenticationWithRegistrySymmetricKey(_deviceConfiguration.DeviceId, _deviceConfiguration.DeviceKey);
 
             //coment test
             //DeviceClient deviceClient = DeviceClient.Create(_deviceConfiguration.IotHubHostName, deviceAuthentication, TransportType.Mqtt);
